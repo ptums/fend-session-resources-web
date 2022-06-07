@@ -6,6 +6,7 @@ const person = {
   role: "Senior Frontend Engineer",
   twitterUrl:"https://twitter.com/ptums923",
   linkedinUrl:"https://www.linkedin.com/in/petertumulty",
+  email: "ptumulty923@gmail.com"
 }
 const ContactCard = () => (
 <li className="max-w-xl px-6 py-10 mx-auto text-center bg-gray-800 rounded-lg xl:px-10 xl:text-left">
@@ -16,24 +17,25 @@ const ContactCard = () => (
                     <div className="text-lg font-medium leading-6 space-y-1">
                       <h3 className="text-white">{person.name}</h3>
                       <p className="text-indigo-400">{person.role}</p>
+                      <p className="text-indigo-400">{person.email}</p>
                     </div>
 
 
                     <ul role="list" className="flex justify-center space-x-5">
                       <li>
-                        <a href={person.twitterUrl} className="text-gray-400 hover:text-gray-300">
+                        <a href={person.twitterUrl} className="text-gray-400 hover:text-gray-300" target="_blank">
                           <span className="sr-only">Twitter</span>
                           <AiOutlineTwitter  className="w-5 h-5"/> 
                         </a>
                       </li>
                       <li>
-                        <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-300">
+                        <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-300" target="_blank">
                           <span className="sr-only">LinkedIn</span>
                           <AiFillLinkedin className="w-5 h-5"/> 
                         </a>
                       </li>
                        <li>
-                        <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-300">
+                        <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-300" target="_blank">
                           <span className="sr-only">Github</span>
                           
                           <AiOutlineGithub  className="w-5 h-5"/>
