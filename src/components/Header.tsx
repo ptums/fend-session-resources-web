@@ -39,9 +39,9 @@ const Header = ({setPage}: Props) => (
                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700">
                     Tutorials
                   </span>
-                  <span onClick={() => setPage('resources')} className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700"
+                  <span onClick={() => setPage('games')} className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700"
                   >
-                    Resources
+                    Games
                   </span>
                   <span onClick={() => setPage('contact')} className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700">
                     Contact
