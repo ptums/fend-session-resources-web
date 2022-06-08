@@ -1,4 +1,4 @@
-import { generateLabelColors } from "../utils/helpters";
+import { generateLabelColors } from "../utils/helpers";
 import { Game } from "../types/Game";
 
 const Card  = ({ title,  types, url }: Game) => (

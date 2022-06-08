@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-export const sessionQuery = gql`
+export const sessionQuery:string = gql`
   query {
     sessions {
       title
@@ -15,7 +15,7 @@ export const sessionQuery = gql`
    }
   }
   `;
-export const gameQuery = gql`
+export const gameQuery:string = gql`
   query {
     games {
       title

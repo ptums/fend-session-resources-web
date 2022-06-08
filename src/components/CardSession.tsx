@@ -2,13 +2,13 @@ import React from 'react';
 import { CalendarIcon } from "@heroicons/react/solid";
 import { CheckCircleIcon } from '@heroicons/react/outline';
 import {  format } from 'date-fns'
-import { generateLabelColors, generateLabel } from "../utils/helpters";
+import { generateLabelColors, generateLabel } from "../utils/helpers";
 import { Session } from '../types/Session';
 
 const CardSession  = ({ title, completed,  types, closeDate, lessonActivity, solution }: Session) => (
   <li className="block hover:bg-gray-50">
     <div className="px-4 py-4 sm:px-6">
-      <div className="flex flex-row items-center">
+      <div className="flex sm:flex-row flex-col sm:items-center">
         {completed  && <CheckCircleIcon className="w-16 h-16 mr-4 text-green-400" />}
         <div className="flex flex-col w-full">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -20,7 +20,7 @@ const CardSession  = ({ title, completed,  types, closeDate, lessonActivity, sol
             </div>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <p className="flex flex-row items-center h-5 mt-1 text-sm text-gray-500">
+            <p className="flex flex-row items-center h-5 mt-3 text-sm text-gray-500 sm:mt-1">
                 <strong className="mr-2">Downloads:</strong>
                   <a href={lessonActivity?.url} className="mr-3 underline">
                       Lesson & Activity

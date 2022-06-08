@@ -1,17 +1,18 @@
-import React, {useState }  from 'react';
+import React, {useState,Suspense,  lazy }  from 'react';
 import {
   useQuery,
 } from "react-query";
 import { request } from "graphql-request";
 import CardSession from './components/CardSession';
-import CardGames from './components/CardGames';
-import ContactCard from './components/ContactCard';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import { Session }  from "./types/Session";
 import { Game } from "./types/Game";
 import { sessionQuery, gameQuery }  from "./api/queries";
 
+
+const CardGames = lazy(() => import("./components/CardGames"));
+const ContactCard = lazy(() => import("./components/ContactCard"))
 const endpoint = "https://api-us-east-1.graphcms.com/v2/cl43i3zwv5dty01xjaab6hf3j/master";
 
 const useSessions = () => useQuery("sessions", async () => {
@@ -49,9 +50,9 @@ function App() {
                {sessionFetching ? (
                  <Loader />
                ) : (
-                 <ul role="list" className="divide-y divide-gray-200">
-                   {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
-                 </ul>
+                   <ul role="list" className="divide-y divide-gray-200">
+                     {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
+                   </ul>
                )}
              </>
            )}
@@ -63,15 +64,21 @@ function App() {
                 {gamesFetching ? (
                   <Loader />
                 ) : (
-                  <ul role="list" className="divide-y divide-gray-200">
-                   {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
-                 </ul>
+                  <Suspense fallback={<Loader />}>
+                    <ul role="list" className="divide-y divide-gray-200">
+                     {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
+                   </ul>
+                 </Suspense>
                 )}
              </>
            )}
 
           </div>
-          {page === "contact" && <ContactCard />}
+          {page === "contact" && (
+              <Suspense fallback={<Loader />}>
+                <ContactCard />
+              </Suspense>
+          )}
         </div>
       </div>
   )
