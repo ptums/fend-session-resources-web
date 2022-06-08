@@ -5,11 +5,11 @@ import {  format } from 'date-fns'
 import { generateLabelColors, generateLabel } from "../utils/helpters";
 import { Session } from '../types/Session';
 
-const CardSession  = ({ title, types, closeDate, lessonActivity, solution }: Session) => (
+const CardSession  = ({ title, completed,  types, closeDate, lessonActivity, solution }: Session) => (
   <li className="block hover:bg-gray-50">
     <div className="px-4 py-4 sm:px-6">
       <div className="flex flex-row items-center">
-        {Boolean(solution) && <CheckCircleIcon className="w-16 h-16 mr-4 text-green-400" />}
+        {completed  && <CheckCircleIcon className="w-16 h-16 mr-4 text-green-400" />}
         <div className="flex flex-col w-full">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <p className="mb-2 text-base font-medium text-indigo-600 truncate sm:mb-0">{title}</p>
@@ -25,7 +25,7 @@ const CardSession  = ({ title, types, closeDate, lessonActivity, solution }: Ses
                   <a href={lessonActivity?.url} className="mr-3 underline">
                       Lesson & Activity
                     </a>
-                    {Boolean(solution) && (
+                    {completed && (
 
                       <a href={solution?.url} className="underline">
                         <strong>SOLUTION</strong>
@@ -34,7 +34,7 @@ const CardSession  = ({ title, types, closeDate, lessonActivity, solution }: Ses
               </p>
             <div className="flex items-center mt-4 text-sm text-gray-500 sm:mt-2">
               <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-               <p><time dateTime={closeDate}>{format(new Date(closeDate), 'MM-dd-yyyy')}</time></p>
+               <p><time dateTime={closeDate}>{format(new Date(closeDate), 'LLLL dd, yyyy')}</time></p>
            </div>
           </div>
         </div>

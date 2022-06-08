@@ -3,6 +3,7 @@ export const sessionQuery = gql`
   query {
     sessions {
       title
+      completed
       solution {
         url
       }

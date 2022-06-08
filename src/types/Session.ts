@@ -1,5 +1,6 @@
 export interface Session {
   title: string;
+  completed: boolean;
 	solution: {
    url: string;
   } | null; 
