@@ -7,6 +7,7 @@ import CardSession from './components/CardSession';
 import CardGames from './components/CardGames';
 import ContactCard from './components/ContactCard';
 import Header from './components/Header';
+import Loader from './components/Loader';
 import { Session }  from "./types/Session";
 import { Game } from "./types/Game";
 import { sessionQuery, gameQuery }  from "./api/queries";
@@ -14,35 +15,27 @@ import { sessionQuery, gameQuery }  from "./api/queries";
 const endpoint = "https://api-us-east-1.graphcms.com/v2/cl43i3zwv5dty01xjaab6hf3j/master";
 
 const useSessions = () => useQuery("sessions", async () => {
-  const { sessions } = await request(
-    endpoint,
-    sessionQuery
-  );
+  const { sessions } = await request( endpoint, sessionQuery);
   return sessions;
 });
 
-
 const useGames = () => useQuery("games", async () => {
-const { games } = await request(
-    endpoint,
-    gameQuery
-  );
+  const { games } = await request(endpoint, gameQuery);
   return games
-
-
 })
 
 function App() {
   const [page, setPage ] = useState('sessions');
   const { data:sessions, error:sessionError, isFetching:sessionFetching } = useSessions();
- const { data:games, error:gamesError, isFetching:gamesFetching } = useGames();
- console.log({ sessions, games })
+  const { data:games, error:gamesError, isFetching:gamesFetching } = useGames();
+  
+  console.log({ sessions, games })
   
   if(sessionError) {
     console.error({ sessionError });
   }
   
- if(gamesError) {
+  if(gamesError) {
     console.error({ gamesError });
   }
 
@@ -54,7 +47,7 @@ function App() {
            {page === "sessions" && (
              <>
                {sessionFetching ? (
-                  <p>Insert Loader..</p>
+                 <Loader />
                ) : (
                  <ul role="list" className="divide-y divide-gray-200">
                    {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
@@ -68,7 +61,7 @@ function App() {
            {page === "games" && (
               <>
                 {gamesFetching ? (
-                    <p>Insert loader...</p>
+                  <Loader />
                 ) : (
                   <ul role="list" className="divide-y divide-gray-200">
                    {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
