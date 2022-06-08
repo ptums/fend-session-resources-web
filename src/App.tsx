@@ -1,16 +1,15 @@
 import React, {useState }  from 'react';
 import {
   useQuery,
-  useQueryClient,
 } from "react-query";
-import { request, gql } from "graphql-request";
+import { request } from "graphql-request";
 import CardSession from './components/CardSession';
 import CardGames from './components/CardGames';
 import ContactCard from './components/ContactCard';
 import Header from './components/Header';
-import lessons from "./lessons.json";
-import games from "./games.json";
-import { sessionQuery }  from "./api/queries";
+import { Session }  from "./types/Session";
+import { Game } from "./types/Game";
+import { sessionQuery, gameQuery }  from "./api/queries";
 
 const endpoint = "https://api-us-east-1.graphcms.com/v2/cl43i3zwv5dty01xjaab6hf3j/master";
 
@@ -20,18 +19,32 @@ const useSessions = () => useQuery("sessions", async () => {
     sessionQuery
   );
   return sessions;
+});
+
+
+const useGames = () => useQuery("games", async () => {
+const { games } = await request(
+    endpoint,
+    gameQuery
+  );
+  return games
+
+
 })
 
 function App() {
   const [page, setPage ] = useState('sessions');
   const { data:sessions, error:sessionError, isFetching:sessionFetching } = useSessions();
-
-  console.log({ sessions })
+ const { data:games, error:gamesError, isFetching:gamesFetching } = useGames();
+ console.log({ sessions, games })
   
   if(sessionError) {
     console.error({ sessionError });
   }
   
+ if(gamesError) {
+    console.error({ gamesError });
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -44,7 +57,7 @@ function App() {
                   <p>Insert Loader..</p>
                ) : (
                  <ul role="list" className="divide-y divide-gray-200">
-                   {sessions.map((session) => <CardSession key={session?.title} {...session} /> )}
+                   {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
                  </ul>
                )}
              </>
@@ -53,10 +66,17 @@ function App() {
               <div>Tutorial</div>
            )}
            {page === "games" && (
-              <ul role="list" className="divide-y divide-gray-200">
-               {games.map(game => <CardGames key={game?.title} {...game} /> )}
-              </ul>
+              <>
+                {gamesFetching ? (
+                    <p>Insert loader...</p>
+                ) : (
+                  <ul role="list" className="divide-y divide-gray-200">
+                   {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
+                 </ul>
+                )}
+             </>
            )}
+
           </div>
           {page === "contact" && <ContactCard />}
         </div>

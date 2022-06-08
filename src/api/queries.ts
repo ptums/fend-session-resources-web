@@ -14,4 +14,13 @@ export const sessionQuery = gql`
    }
   }
   `;
+export const gameQuery = gql`
+  query {
+    games {
+      title
+      url
+      types
+    }
+  }
+  `;
 

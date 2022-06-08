@@ -1,21 +1,14 @@
-import React from 'react';
-import { CalendarIcon } from "@heroicons/react/solid";
 import { generateLabelColors } from "../utils/helpters";
+import { Game } from "../types/Game";
 
-interface Props {
-    title: string;
-    type: string;
-    url: string;
- 
-}
-const Card  = ({ title,  type, url }: Props) => (
+const Card  = ({ title,  types, url }: Game) => (
   <li className="block hover:bg-gray-50">
     <div className="px-4 py-4 sm:px-6">
        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <p className="mb-2 text-base font-medium text-indigo-600 truncate sm:mb-0">{title}</p>
           <div className="flex flex-shrink-0 sm:ml-2">
-            <p className={`inline-flex px-2 text-xs font-semibold ${generateLabelColors(type)} rounded-full leading-5`}>
-                 {type}
+            <p className={`inline-flex px-2 text-xs font-semibold ${generateLabelColors(types)} rounded-full leading-5`}>
+                 {types}
              </p>
            </div>
         </div>

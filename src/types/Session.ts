@@ -1,11 +1,11 @@
 export interface Session {
   title: string;
-	solution: string;
+	solution: {
+   url: string;
+  } | null; 
 	lessonActivity: {
    url: string
   } | null;
-	closeDate:{
-   url: string;
-  } | null;
+  closeDate: string;
 	types: string;
 }
