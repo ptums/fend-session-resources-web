@@ -1,6 +1,6 @@
 import React from 'react';
 import { CalendarIcon } from "@heroicons/react/solid";
-import { generateLabelColors } from "../utils/helpters";
+import { generateLabelColors } from "../utils/helpers";
 
 interface Props {
     title: string;
@@ -11,7 +11,7 @@ interface Props {
     fileUrl: string;
  
 }
-const Card  = ({ title, labelColor, type, closeDateFull, closeDate, fileUrl }: Props) => (
+const CardTutorials  = ({ title, labelColor, type, closeDateFull, closeDate, fileUrl }: Props) => (
   <li className="block hover:bg-gray-50">
     <div className="px-4 py-4 sm:px-6">
        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -42,4 +42,4 @@ const Card  = ({ title, labelColor, type, closeDateFull, closeDate, fileUrl }: P
 
 );
 
-export default Card;
+export default CardTutorials;
