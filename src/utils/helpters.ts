@@ -16,7 +16,7 @@ export const generateLabel = (type: string) => {
     case 'Intro':
       return 'Intro to Web Development';
     case 'CSS':
-      return 'Intermediate Css: Flexbox and Grid';
+      return 'Intermediate CSS: Flexbox and Grid';
     case 'JavaScript':
       return 'JavaScript & the DOM';
    default:
