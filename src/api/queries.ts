@@ -25,3 +25,12 @@ export const gameQuery:string = gql`
   }
   `;
 
+export const tutorialQuery:string = gql`
+query {
+  tutorials {
+    title
+    videoUrl
+    category
+  }
+}
+`;

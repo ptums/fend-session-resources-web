@@ -8,11 +8,13 @@ import Header from './components/Header';
 import Loader from './components/Loader';
 import { Session }  from "./types/Session";
 import { Game } from "./types/Game";
-import { sessionQuery, gameQuery }  from "./api/queries";
+import { Tutorial } from "./types/Tutorial";
+import { sessionQuery, gameQuery, tutorialQuery }  from "./api/queries";
 
 
 const CardGames = lazy(() => import("./components/CardGames"));
 const ContactCard = lazy(() => import("./components/ContactCard"))
+const CardTutorials = lazy(() => import("./components/CardTutorials"))
 const endpoint = "https://api-us-east-1.graphcms.com/v2/cl43i3zwv5dty01xjaab6hf3j/master";
 
 const useSessions = () => useQuery("sessions", async () => {
@@ -23,14 +25,21 @@ const useSessions = () => useQuery("sessions", async () => {
 const useGames = () => useQuery("games", async () => {
   const { games } = await request(endpoint, gameQuery);
   return games
-})
+});
+
+const useTutorials = () => useQuery("tutorials", async () => {
+  const { tutorials } = await request(endpoint, tutorialQuery);
+
+  return tutorials;
+});
 
 function App() {
   const [page, setPage ] = useState('sessions');
   const { data:sessions, error:sessionError, isFetching:sessionFetching } = useSessions();
   const { data:games, error:gamesError, isFetching:gamesFetching } = useGames();
-  
-  console.log({ sessions, games })
+  const { data:tutorials, error: tutorialsError, isFetching:tutorialsFetching } = useTutorials();
+
+  console.log({ sessions, games, tutorials })
   
   if(sessionError) {
     console.error({ sessionError });
@@ -38,6 +47,10 @@ function App() {
   
   if(gamesError) {
     console.error({ gamesError });
+  }
+  
+  if(tutorialsError) {
+    console.error({ tutorialsError });
   }
 
   return (
@@ -57,7 +70,17 @@ function App() {
              </>
            )}
            {page === "tutorials" && (
-              <div>Tutorial</div>
+             <>
+                {tutorialsFetching ? (
+                  <Loader />
+                ) : (
+                  <Suspense fallback={<Loader />}>
+                    <ul role="list" className="divide-y divide-gray-200">
+                     {tutorials.map((tutorial:Tutorial) => <CardTutorials key={tutorial?.title} {...tutorial} /> )}
+                   </ul>
+                 </Suspense>
+                )}
+             </>
            )}
            {page === "games" && (
               <>
