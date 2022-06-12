@@ -29,7 +29,7 @@ export const tutorialQuery:string = gql`
 query {
   tutorials {
     title
-    videoUrl
+    url
     category
   }
 }

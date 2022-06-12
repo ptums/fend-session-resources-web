@@ -4,7 +4,6 @@ import {
 } from "react-query";
 import { request } from "graphql-request";
 import CardSession from './components/CardSession';
-import Header from './components/Header';
 import Loader from './components/Loader';
 import Page from './layout/Page';
 import { Session }  from "./types/Session";
