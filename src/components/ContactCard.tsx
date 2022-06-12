@@ -11,7 +11,7 @@ const person = {
 }
 
 const ContactCard = () => (
-  <div className="max-w-xl px-6 py-10 mx-auto text-center bg-gray-800 rounded-lg xl:px-10 xl:text-left">
+  <div className="max-w-xl px-6 py-10 mx-auto text-center xl:px-10 xl:text-left">
       <img className="w-40 h-40 mx-auto rounded-full xl:h-48 xl:w-48" src={person.imageUrl} alt={person?.name} />
       <div className="mt-6 xl:flex xl:items-center xl:justify-between">
         <div className="text-lg font-medium leading-6 space-y-1">

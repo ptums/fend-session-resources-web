@@ -6,6 +6,7 @@ import { request } from "graphql-request";
 import CardSession from './components/CardSession';
 import Header from './components/Header';
 import Loader from './components/Loader';
+import Page from './layout/Page';
 import { Session }  from "./types/Session";
 import { Game } from "./types/Game";
 import { Tutorial } from "./types/Tutorial";
@@ -38,8 +39,6 @@ function App() {
   const { data:sessions, error:sessionError, isFetching:sessionFetching } = useSessions();
   const { data:games, error:gamesError, isFetching:gamesFetching } = useGames();
   const { data:tutorials, error: tutorialsError, isFetching:tutorialsFetching } = useTutorials();
-
-  console.log({ sessions, games, tutorials })
   
   if(sessionError) {
     console.error({ sessionError });
@@ -53,57 +52,41 @@ function App() {
     console.error({ tutorialsError });
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
-      <Header setPage={setPage}/>
-      <div className="max-w-xs py-12 mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
-         <div className="w-full bg-white shadow sm:rounded-md">
-           {page === "sessions" && (
-             <>
-               {sessionFetching ? (
-                 <Loader />
-               ) : (
-                   <ul role="list" className="divide-y divide-gray-200">
-                     {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
-                   </ul>
-               )}
-             </>
-           )}
-           {page === "tutorials" && (
-             <>
-                {tutorialsFetching ? (
-                  <Loader />
-                ) : (
-                  <Suspense fallback={<Loader />}>
-                    <ul role="list" className="divide-y divide-gray-200">
-                     {tutorials.map((tutorial:Tutorial) => <CardTutorials key={tutorial?.title} {...tutorial} /> )}
-                   </ul>
-                 </Suspense>
-                )}
-             </>
-           )}
-           {page === "games" && (
-              <>
-                {gamesFetching ? (
-                  <Loader />
-                ) : (
-                  <Suspense fallback={<Loader />}>
-                    <ul role="list" className="divide-y divide-gray-200">
-                     {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
-                   </ul>
-                 </Suspense>
-                )}
-             </>
-           )}
+  if(sessionFetching || tutorialsFetching || gamesFetching) {
+    return (
+     <Page setPage={setPage}>
+        <Loader />
+     </Page>
+    )
+  }
 
-          </div>
-          {page === "contact" && (
-              <Suspense fallback={<Loader />}>
-                <ContactCard />
-              </Suspense>
-          )}
-        </div>
-      </div>
+  return (
+    <Page setPage={setPage}>
+      {page === "sessions" && (
+        <ul role="list" className="divide-y divide-gray-200">
+          {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
+        </ul>
+      )}
+    {page === "tutorials" && (
+      <Suspense fallback={<Loader />}>
+        <ul role="list" className="divide-y divide-gray-200">
+          {tutorials.map((tutorial:Tutorial) => <CardTutorials key={tutorial?.title} {...tutorial} /> )}
+        </ul>
+      </Suspense>
+     )}
+    {page === "games" && (
+       <Suspense fallback={<Loader />}>
+         <ul role="list" className="divide-y divide-gray-200">
+           {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
+         </ul>
+       </Suspense>
+     )}
+    {page === "contact" && (
+      <Suspense fallback={<Loader />}>
+        <ContactCard />
+      </Suspense>
+    )}
+  </Page>
   )
 } 
 
