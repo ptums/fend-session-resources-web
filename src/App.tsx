@@ -63,7 +63,10 @@ function App() {
     <Page setPage={setPage}>
       {page === "sessions" && (
         <ul role="list" className="divide-y divide-gray-200">
-          {sessions.map((session: Session) => <CardSession key={session?.title} {...session} /> )}
+          {sessions
+            .sort((a: Session, b: Session) => new Date(a?.closeDate) > new Date(b?.closeDate) ? 1 : -1 )
+            .map((session: Session) => <CardSession key={session?.title} {...session} />)
+          }
         </ul>
       )}
     {page === "tutorials" && (
