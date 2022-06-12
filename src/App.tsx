@@ -73,7 +73,7 @@ function App() {
       <Suspense fallback={<Loader />}>
         <ul role="list" className="divide-y divide-gray-200">
           {tutorials
-            .sort((a:Tutorial,b: Tutorial) => a?.category.trim().toLowerCase() === b?.category.trim().toLowerCase() ? 1 : -1)
+            .sort((a:Tutorial,b: Tutorial) => a?.category.trim().toLowerCase() > b?.category.trim().toLowerCase() ? 1 : -1)
             .map((tutorial:Tutorial) => <CardTutorials key={tutorial?.title} {...tutorial} />)
           }
         </ul>
@@ -83,7 +83,7 @@ function App() {
        <Suspense fallback={<Loader />}>
          <ul role="list" className="divide-y divide-gray-200">
            {games
-             .sort((a:Game, b: Game) => a?.types.trim().toLowerCase() === b?.types.trim().toLowerCase() ? 1 : -1)
+             .sort((a:Game, b: Game) => a?.types.trim().toLowerCase() > b?.types.trim().toLowerCase() ? 1 : -1)
              .map((game:Game) => <CardGames key={game?.title} {...game} />)
            }
          </ul>

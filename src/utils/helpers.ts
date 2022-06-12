@@ -13,6 +13,10 @@ export const generateLabelColors = (type: string) => {
       return 'bg-blue-100 text-blue-800';
     case 'Code Sandbox':
       return 'bg-yellow-100 text-yellow-800';
+    case 'CSS Practice':
+      return 'bg-red-100 text-red-800';
+    case 'Git':
+      return 'bg-violet-100 text-violet-800';
     default:
       return "bg-stone-100 text-stone-800";
   }
