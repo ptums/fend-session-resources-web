@@ -69,14 +69,20 @@ function App() {
     {page === "tutorials" && (
       <Suspense fallback={<Loader />}>
         <ul role="list" className="divide-y divide-gray-200">
-          {tutorials.map((tutorial:Tutorial) => <CardTutorials key={tutorial?.title} {...tutorial} /> )}
+          {tutorials
+            .sort((a:Tutorial,b: Tutorial) => a?.category.trim().toLowerCase() === b?.category.trim().toLowerCase() ? 1 : -1)
+            .map((tutorial:Tutorial) => <CardTutorials key={tutorial?.title} {...tutorial} />)
+          }
         </ul>
       </Suspense>
      )}
     {page === "games" && (
        <Suspense fallback={<Loader />}>
          <ul role="list" className="divide-y divide-gray-200">
-           {games.map((game:Game) => <CardGames key={game?.title} {...game} /> )}
+           {games
+             .sort((a:Game, b: Game) => a?.types.trim().toLowerCase() === b?.types.trim().toLowerCase() ? 1 : -1)
+             .map((game:Game) => <CardGames key={game?.title} {...game} />)
+           }
          </ul>
        </Suspense>
      )}
