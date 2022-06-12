@@ -15,7 +15,7 @@ const Card  = ({ title,  types, url }: Game) => (
         <div className="mt-2 sm:flex sm:justify-between">
            <div className="sm:flex">
               <p className="flex flex-row items-center h-5 text-sm text-gray-500">
-                  <a href={url} className="mr-2 underline">
+                  <a href={url} className="mr-2 underline" rel="noopener noreferrer nofollow">
                     {url}  
                   </a>
               </p>                   
