@@ -8,7 +8,7 @@ import { Session } from '../types/Session';
 const CardSession  = ({ title, completed,  types, closeDate, lessonActivity, solution }: Session) => (
   <li className="block hover:bg-gray-50">
     <div className="px-4 py-4 sm:px-6">
-      <div className="flex sm:flex-row flex-col sm:items-center">
+      <div className="flex flex-col sm:flex-row sm:items-center">
         {completed  && <CheckCircleIcon className="w-16 h-16 mr-4 text-green-400" />}
         <div className="flex flex-col w-full">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -25,7 +25,7 @@ const CardSession  = ({ title, completed,  types, closeDate, lessonActivity, sol
                   <a href={lessonActivity?.url} className="mr-3 underline">
                       Lesson & Activity
                     </a>
-                    {completed && (
+                    {(completed && solution?.url) && (
 
                       <a href={solution?.url} className="underline">
                         <strong>SOLUTION</strong>
